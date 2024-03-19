@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: ;
+            height: 100vh;
+        }
+        .question-container {
+            text-align: center;
+        }
+        .answer-input {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .next-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .next-button:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="question-container">
+       <hr> <marquee>*Take khata, pen and calculator. You will have need them.</marquee><br><hr><br>
+       <img src="https://i.ibb.co/7SvHNT9/Smart-Select-20240318-062135-Slides.jpg" alt="Smart-Select-20240318-062135-Slides" border="0" width="60%">
+        <h2>What is the answer?</h2>
+        <input type="number" id="answer" class="answer-input" placeholder="Enter your answer" required>
+        <button onclick="checkAnswer()" class="next-button">Next</button>
+        <p id="error-message" class="error-message"></p>
+    </div>
+
+    <script>
+        var attempts = 0;
+
+        function checkAnswer() {
+            var userAnswer = parseFloat(document.getElementById('answer').value);
+            if (userAnswer === 5.64) {
+                // Redirect to the next page
+                window.location.href = 'math2.html';
+            } else {
+                attempts++;
+                document.getElementById('error-message').textContent = 'Incorrect answer. Please try again.';
+                if (attempts >= 5) {
+                    // Lock the page 
+                    window.location.href = 'lock.html';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

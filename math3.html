@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Question</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: centr;
+            height: 100vh;
+        }
+        .question-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .answer-input {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .next-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .next-button:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+        .attempts {
+            margin-top: 10px;
+            color:red;
+        }
+        .timer {
+            font-size: 18px;
+            color:red;
+        }
+    </style>
+</head>
+<body><hr><marquee>*you have only 5 attempts</marquee><hr>
+<h3>3.(EF×12)—————(digital root)——→ G</h3>
+<h3> (A+D+G)————(digital root)——→ H</h3>
+    <div class="question-container">
+        <h2>What is the answer?</h2>
+        <input type="number" id="answer" class="answer-input" placeholder="Enter your answer(G.H)" required>
+        <button onclick="checkAnswer()" class="next-button">Next</button>
+        <p id="error-message" class="error-message"></p>
+        <p id="attempts" class="attempts"></p>
+    </div>
+    <div class="timer" id="timer">Timer: 02:00</div>
+
+    <script>
+        var attempts = 0;
+        var timerInterval;
+
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            timerInterval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = "Timer: " + minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(timerInterval);
+                    // Redirect to lock page after 2 minutes
+                    window.location.href = 'lock.html';
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var twoMinutes = 120,
+                display = document.querySelector('#timer');
+            startTimer(twoMinutes, display);
+        };
+
+        function checkAnswer() {
+            var userAnswer = parseFloat(document.getElementById('answer').value);
+            if (userAnswer === 5.64) {
+                clearInterval(timerInterval);
+                // Redirect to math4 page
+                window.location.href = 'math4.html';
+            } else {
+                attempts++;
+                document.getElementById('error-message').textContent = 'Incorrect answer';
+                document.getElementById('attempts').textContent = 'Attempts: ' + attempts;
+                if (attempts >= 5) {
+                    clearInterval(timerInterval);
+                    // Redirect to lock page after 5 wrong attempts
+                    window.location.href = 'lock.html';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

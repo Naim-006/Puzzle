@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: cener;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+        }
+        .name-input {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .done-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .done-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"><br>
+    <b> •Find the Exact Letter of <u>ADGH?</u> and arrange them following to
+make a perfect name.</b><br><br>
+        <img src="https://i.ibb.co/m8TnB99/Smart-Select-20240318-072047-Slides.jpg"  width="300">
+        <br><br>
+        <input type="text" id="name" class="name-input" placeholder="Enter The name" required>
+        <br><br>
+        <button onclick="checkName()" class="done-button">Done</button>
+    </div>
+
+    <script>
+        function checkName() {
+            var nameInput = document.getElementById('name').value;
+            if (nameInput.toLowerCase() === 'janna') {
+                // Congratulations event
+                alert('Congratulations!you are a genius');
+            } else {
+                // Sad event
+                alert('Oops! Best of luck next time.');
+            }
+            // Close window after 10 seconds
+            setTimeout(function() {
+                window.close();
+            }, 10000);
+        }
+    </script>
+</body>
+</html>

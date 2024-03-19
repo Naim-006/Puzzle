@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Entry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content:center;
+            align-items:center;
+            height: 100vh;
+        }
+        .password-form {
+            text-align: center;
+        }
+        .password-input {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .enter-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .enter-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="password-form">
+      <h4><i>Hey there! let's start the game with 'মথপোকা'.</i> <br><br><br>	→ What was the name of a famous puzzle related to 'মথপোকা'
+     </h4>  <form id="passwordForm" onsubmit="return validatePassword()" method="post">
+            <input type="password" id="password" class="password-input" placeholder="your answer " required>
+            <button type="submit" class="enter-button"> Enter</button>
+        </form>
+    </div>
+
+    <script>
+        function validatePassword() {
+            var passwordInput = document.getElementById('password').value;
+            if (passwordInput === 'cicada3301') {
+                // Redirect to the next page
+                window.location.href = 'homepage.html';
+                return false; // Prevent default form submission
+            } else {
+                alert('Incorrect Answer, Please try again.');
+                return false; // Prevent default form submission
+            }
+        }
+    </script>
+</body>
+</html>
