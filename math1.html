@@ -7,22 +7,28 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
+            background-color: #bfeaff;
+            margin: ;
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: ;
+            align-items: center;
             height: 100vh;
         }
         .question-container {
             text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color:#9b9b9bed;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
         .answer-input {
             padding: 10px;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
+            border: 2px solid #007bff;
             border-radius: 5px;
+            font-size: 16px;
+            width: 150px;
         }
         .next-button {
             padding: 10px 20px;
@@ -32,6 +38,7 @@
             color: #fff;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-size: 16px;
         }
         .next-button:hover {
             background-color: #0056b3;
@@ -39,31 +46,75 @@
         .error-message {
             color: red;
             margin-top: 10px;
+            font-size: 14px;
         }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ccc;
+            margin: 20px 0;
+        }
+        marquee {
+            font-size: 12px;
+            color: #ee0031;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .menu-bar { position: absolute; top: 30px; right: 30px; cursor: pointer; color: #0003da; }
+         .developer-info { display: none; position: fixed; top:10%; left: %; background-color:#ace5e5; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
 <body>
+    <div class="menu-bar" onclick="toggleDeveloperInfo()"> _____<br>_____<br>_____ </div>
+    
+    <!-- Developer info -->
+    <div class="developer-info" id="developer-info">
+        <h3>Developed by  </h3>
+        <p><img src="https://i.ibb.co/dWQHBh1/20240319-203819.jpg"></p>
+        <p align="center">Naim Hossain</p>
+        <p align="center"><a href="https://www.facebook.com/kbauzbl">Facebook</a></p>
+        <p align="center"><a href="https://github.com/Naim-006">Github</a></p>
+        <p align="center"><a href="hnayeem264@gmail.com">E- mail</a></p>
+        <!-- Add more information as needed -->
+    </div>
     <div class="question-container">
-       <hr> <marquee>*Take khata, pen and calculator. You will have need them.</marquee><br><hr><br>
-       <img src="https://i.ibb.co/7SvHNT9/Smart-Select-20240318-062135-Slides.jpg" alt="Smart-Select-20240318-062135-Slides" border="0" width="60%">
+        
+        <marquee>Take khata, pen, and calculator. You will need them.</marquee>
+        
+        
+        <h2>Math Question 1</h2>
+        <img src="https://i.ibb.co/7SvHNT9/Smart-Select-20240318-062135-Slides.jpg" alt="Smart-Select-20240318-062135-Slides">
         <h2>What is the answer?</h2>
         <input type="number" id="answer" class="answer-input" placeholder="Enter your answer" required>
+        <br>
         <button onclick="checkAnswer()" class="next-button">Next</button>
         <p id="error-message" class="error-message"></p>
     </div>
 
     <script>
+        function toggleDeveloperInfo() {
+            var developerInfo = document.getElementById('developer-info');
+            if (developerInfo.style.display === 'none') {
+                developerInfo.style.display = 'block';
+            } else {
+                developerInfo.style.display = 'none';
+            }
+        }
         var attempts = 0;
 
         function checkAnswer() {
             var userAnswer = parseFloat(document.getElementById('answer').value);
-            if (userAnswer === 5.64) {
+            if (userAnswer === 5.25) {
                 // Redirect to the next page
                 window.location.href = 'math2.html';
             } else {
                 attempts++;
                 document.getElementById('error-message').textContent = 'Incorrect answer. Please try again.';
-                if (attempts >= 5) {
+                if (attempts >= 20) {
                     // Lock the page 
                     window.location.href = 'lock.html';
                 }

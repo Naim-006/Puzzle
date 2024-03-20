@@ -7,17 +7,41 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            background-color: #ffffbf;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
-            align-items:center;
-            justify-content:;
+            align-items: center;
+            justify-content: center;
             height: 100vh;
         }
-        .question-container {
+        .container {
+            background-color: #989898df;
+            padding: 20px;
+            margin: 10px;
+            margin-bottom: 100px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             text-align: center;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #ccc;
+            width: 100%;
+            margin: 20px 0;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .marquee {
+            font-size: 12px;
+            color: #df252edf;
+            margin-bottom: 0px;
+        }
+        .question-container {
             margin-bottom: 20px;
         }
         .answer-input {
@@ -25,6 +49,7 @@
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            width: 150px;
         }
         .next-button {
             padding: 10px 20px;
@@ -39,22 +64,58 @@
             background-color: #0056b3;
         }
         .timer {
-            font-size: 18px;
-            color:red;
+            text-align: center;
+            width: 200px;
+            padding: 5px;
+            margin: 10px;
+            border-radius: 5px;
+            background-color: red;
+            font-size: 20px;
+            color: #6af5ff;
+            font-family: courier;
         }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+         .menu-bar { position: absolute; top: 15px; right: 20px; cursor: pointer; color: #0003da; }
+         .developer-info { display: none; position: fixed; top:10%; left: %; background-color:#919e91; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
-<body>
-    <hr><marquee>*from here timer will knock you out</marquee><br><hr>
-    <img src="https://i.ibb.co/th79XRs/Smart-Select-20240318-062155-Slides.jpg" alt="Smart-Select-20240318-062155-Slides" border="0" width="75%">
-    <div class="question-container">
-        <h2>What is the answer?</h2>
-        <input type="number" id="answer" class="answer-input" placeholder="Enter your answer" required>
-        <button onclick="checkAnswer()" class="next-button">Next</button>
+<body><div class="menu-bar" onclick="toggleDeveloperInfo()"> _____<br>_____<br>_____</div>
+    
+    <!-- Developer info -->
+    <div class="developer-info" id="developer-info">
+        <h3>Developer </h3>
+        <p><img src="https://i.ibb.co/dWQHBh1/20240319-203819.jpg"></p>
+        <h4>Naim Hossain</h4>
+        <p align="center"><a href="https://www.facebook.com/kbauzbl">Facebook</a></p>
+        <p align="center"><a href="https://github.com/Naim-006">Github</a></p>
+        <p align="center"><a href="hnayeem264@gmail.com">E- mail</a></p>
+        <!-- Add more information as needed -->
     </div>
-    <div class="timer" id="timer">Timer: 2:00</div>
+    <div class="timer" id="timer">Timer: 02:00</div>
+    <div class="container">
+        <marquee class="marquee">*Timer will knock you out *</marquee>
+        <h2>Math Question 2</h2>
+        <img src="https://i.ibb.co/th79XRs/Smart-Select-20240318-062155-Slides.jpg" alt="Smart-Select-20240318-062155-Slides">
+        <div class="question-container">
+            <h3>What is the answer?</h3>
+            <input type="number" id="answer" class="answer-input" placeholder="Enter your answer" required>
+            <button onclick="checkAnswer()" class="next-button">Next</button><br><br>
+            <p id="error-message" class="error-message"></p>
+        </div>
+    </div>
 
-    <script>
+    <script>function toggleDeveloperInfo() {
+            var developerInfo = document.getElementById('developer-info');
+            if (developerInfo.style.display === 'none') {
+                developerInfo.style.display = 'block';
+            } else {
+                developerInfo.style.display = 'none';
+            }
+        }
         var attempts = 0;
         var timerInterval;
 
@@ -78,7 +139,7 @@
         }
 
         window.onload = function () {
-            var twoMinutes = 120,
+            var twoMinutes = 119,
                 display = document.querySelector('#timer');
             startTimer(twoMinutes, display);
         };
@@ -91,9 +152,10 @@
                 window.location.href = 'math3.html';
             } else {
                 attempts++;
-                if (attempts >= 50) {
+                document.getElementById('error-message').textContent = 'Incorrect answer. Please try again.';
+                if (attempts >= 20) {
                     clearInterval(timerInterval);
-                    // Redirect to lock page after 5 wrong attempts
+                    // Redirect to lock page after 20 wrong attempts
                     window.location.href = 'lock.html';
                 }
             }

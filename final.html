@@ -3,28 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Name Page</title>
+    <title>Question Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
-            margin: 0;
+            margin: ;
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: cener;
+            align-items: center;
             height: 100vh;
         }
-        .container {
+        .question-container {
             text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color:#9b9b9bed;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
-        .name-input {
+        .answer-input {
             padding: 10px;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
+            border: 2px solid #007bff;
             border-radius: 5px;
+            font-size: 16px;
+            width: 200px;
         }
-        .done-button {
+        .next-button {
             padding: 10px 20px;
             background-color: #007bff;
             border: none;
@@ -32,38 +38,89 @@
             color: #fff;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-size: 16px;
         }
-        .done-button:hover {
+        .next-button:hover {
             background-color: #0056b3;
         }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ccc;
+            margin: 20px 0;
+        }
+        marquee {
+            font-size: 12px;
+            color: #ee0031;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+         .menu-bar { position: absolute; top: 15px; right: 20px; cursor: pointer; color: #0003da; }
+         .developer-info { display: none; position: fixed; top:10%; left: %; background-color:#ff555f; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);width:85%;height:70%; }
     </style>
 </head>
-<body>
-    <div class="container"><br>
-    <b> •Find the Exact Letter of <u>ADGH?</u> and arrange them following to
+<body><div class="menu-bar" onclick="toggleDeveloperInfo()">  _____<br>_____<br>_____</div>
+    
+    <!-- Developer info -->
+    <div class="developer-info" id="developer-info">
+        <h3>Developer </h3>
+        <p><img src="https://i.ibb.co/dWQHBh1/20240319-203819.jpg"></p>
+        <h4>Naim Hossain</h4>
+        <p align="center"><a href="https://www.facebook.com/kbauzbl">Facebook</a></p>
+        <p align="center"><a href="https://github.com/Naim-006">Github</a></p>
+        <p align="center"><a href="hnayeem264@gmail.com">E- mail</a></p>
+        <!-- Add more information as needed -->
+    </div>
+    <div class="question-container">
+        
+        <marquee>Select the words serially by the numbers you get to find the name.  The name is containing 5 words.
+        .</marquee>
+        
+        
+        <h2></h2><b> •Find the Exact Letter of <u>ADGH?</u> and arrange them following to
 make a perfect name.</b><br><br>
-        <img src="https://i.ibb.co/m8TnB99/Smart-Select-20240318-072047-Slides.jpg"  width="300">
-        <br><br>
-        <input type="text" id="name" class="name-input" placeholder="Enter The name" required>
-        <br><br>
-        <button onclick="checkName()" class="done-button">Done</button>
+        <img src="https://i.ibb.co/m8TnB99/Smart-Select-20240318-072047-Slides.jpg">
+        <h2>What is the answer?</h2>
+        <input type="text" id="answer" class="answer-input" placeholder="Enter your answer" required>
+        <br>
+        <button onclick="checkAnswer()" class="next-button">Next</button>
+        <p id="error-message" class="error-message"></p>
     </div>
 
-    <script>
-        function checkName() {
-            var nameInput = document.getElementById('name').value;
-            if (nameInput.toLowerCase() === 'janna') {
-                // Congratulations event
-                alert('Congratulations!you are a genius');
+    <script>function toggleDeveloperInfo() {
+            var developerInfo = document.getElementById('developer-info');
+            if (developerInfo.style.display === 'none') {
+                developerInfo.style.display = 'block';
             } else {
-                // Sad event
-                alert('Oops! Best of luck next time.');
+                developerInfo.style.display = 'none';
             }
-            // Close window after 10 seconds
-            setTimeout(function() {
-                window.close();
-            }, 10000);
+        }
+        var attempts = 0;
+
+        function checkAnswer() {
+            var userAnswer = parseFloat(document.getElementById('answer').value);
+            if (userAnswer === 5.25) {
+                // Redirect to the next page
+                window.location.href = 'congratulation.html';
+            } else {
+                attempts++;
+                document.getElementById('error-message').textContent = 'Incorrect answer. Please try again.';
+                if (attempts >= 5) {
+                    // Lock the page 
+                    window.location.href = 'lock.html';
+                }
+            }
         }
     </script>
 </body>
 </html>
+

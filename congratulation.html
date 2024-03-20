@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Congratulations!</title>
+<style>
+    /* Animation for fireworks */
+    @keyframes fireworksAnimation {
+        0% {
+            transform: translateY(0) rotate(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-1000px) rotate(720deg);
+            opacity: 0;
+        }
+    }
+
+    .firework {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: linear-gradient(45deg, #ff0000, #ffff00);
+        border-radius: 50%;
+        animation: fireworksAnimation 1s ease-out;
+    }
+
+    /* Animation for other elements */
+    @keyframes congratsAnimation {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .congrats {
+        text-align: center;
+        font-size: 24px;
+        animation: congratsAnimation 2s ease-in-out infinite;
+    }
+</style>
+</head>
+<body>
+<div class="firework" style="top: 50%; left: 50%;"></div>
+<div class="firework" style="top: 50%; left: 50%;"></div>
+<div class="firework" style="top: 50%; left: 50%;"></div>
+<div class="firework" style="top: 50%; left: 50%;"></div>
+<div class="firework" style="top: 50%; left: 50%;"></div>
+
+<div class="congrats">
+    <p>Congratulations! You are a genius.</p>
+</div>
+
+<script>
+    // Redirect to developer.html after 5 seconds
+    setTimeout(function() {
+        window.location.href = "developer.html";
+    }, 5000);
+</script>
+</body>
+</html>
