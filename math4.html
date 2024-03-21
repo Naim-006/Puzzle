@@ -103,7 +103,7 @@
         <div class="question-container">
             
             <h3>What is the answer?</h3>
-            <input type="number" id="answer" class="answer-input" placeholder="Enter your answer (G.H)" required>
+            <input type="text" id="answer" class="answer-input" placeholder="Enter your answer (G.H)" required>
             <button onclick="checkAnswer()" class="next-button">Next</button>
             <p id="error-message" class="error-message"></p>
             <p id="attempts" class="attempts"></p>
@@ -148,7 +148,7 @@
 
         function checkAnswer() {
             var userAnswer = parseFloat(document.getElementById('answer').value);
-            if (userAnswer === 5.64) {
+            if (userAnswer === i ) {
                 clearInterval(timerInterval);
                 // Redirect to math4 page
                 window.location.href = 'final.html';
