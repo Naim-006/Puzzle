@@ -146,9 +146,9 @@
             startTimer(twoMinutes, display);
         };
 
-        function checkAnswer() {
-            var userAnswer = parseFloat(document.getElementById('answer').value);
-            if (userAnswer === i ) {
+        function validatePassword() {
+            var passwordInput = parseFloat(document.getElementById('password').value);
+            if (passwordInput === i ) {
                 clearInterval(timerInterval);
                 // Redirect to math4 page
                 window.location.href = 'final.html';
