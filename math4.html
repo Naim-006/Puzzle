@@ -146,11 +146,11 @@
             startTimer(twoMinutes, display);
         };
 
-        function validatePassword() {
-            var passwordInput = parseFloat(document.getElementById('password').value);
-            if (passwordInput === i ) {
+        function checkAnswer() {
+            var userAnswer = parseFloat(document.getElementById('answer').value);
+            if (passwordInput === 5.25 ) {
                 clearInterval(timerInterval);
-                // Redirect to math4 page
+                // Redirect to final page
                 window.location.href = 'final.html';
             } else {
                 attempts++;
