@@ -83,7 +83,8 @@
          .developer-info { display: none; position: fixed; top:10%; left: %; background-color:#919e91; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
-<body><div class="menu-bar" onclick="toggleDeveloperInfo()"> _____<br>_____<br>_____</div>
+<body>
+<div class="menu-bar" onclick="toggleDeveloperInfo()"> _____<br>_____<br>_____</div>
     
     <!-- Developer info -->
     <div class="developer-info" id="developer-info">
@@ -107,68 +108,73 @@
             <p id="error-message" class="error-message"></p>
         </div>
     </div>
+<script>
+    var isRefreshing = false;
 
-    <script>
-        window.onload = function() {
-    // Check if the page is refreshed
-    if (performance.navigation.type === 1) {
-        // Redirect to index.html
-        window.location.href = 'index.html';
-    }
-};
-
-        function toggleDeveloperInfo() {
-            var developerInfo = document.getElementById('developer-info');
-            if (developerInfo.style.display === 'none') {
-                developerInfo.style.display = 'block';
-            } else {
-                developerInfo.style.display = 'none';
-            }
-        }
-        var attempts = 0;
-        var timerInterval;
-
-        function startTimer(duration, display) {
-            var timer = duration, minutes, seconds;
-            timerInterval = setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = "Timer: " + minutes + ":" + seconds;
-
-                if (--timer < 0) {
-                    clearInterval(timerInterval);
-                    // Redirect to lock page after 2 minutes
-                    window.location.href = 'lock_page.html';
-                }
-            }, 1000);
-        }
-
-        window.onload = function () {
-            var twoMinutes = 119,
-                display = document.querySelector('#timer');
+    window.onload = function() {
+        // Check if the page is refreshed
+        if (performance.navigation.type === 1 && !isRefreshing) {
+            setTimeout(function() {
+                window.location.href = 'cheat.html';
+            }, 100);
+        } else {
+            var twoMinutes = 119;
+            var display = document.querySelector('#timer');
             startTimer(twoMinutes, display);
-        };
+        }
+    };
 
-        function checkAnswer() {
-            var userAnswer = parseFloat(document.getElementById('answer').value);
-            if (userAnswer === 1.33) {
+    window.onbeforeunload = function() {
+        isRefreshing = true;
+    };
+
+    function toggleDeveloperInfo() {
+        var developerInfo = document.getElementById('developer-info');
+        if (developerInfo.style.display === 'none') {
+            developerInfo.style.display = 'block';
+        } else {
+            developerInfo.style.display = 'none';
+        }
+    }
+
+    var attempts = 0;
+    var timerInterval;
+
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        timerInterval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = "Timer: " + minutes + ":" + seconds;
+
+            if (--timer < 0) {
                 clearInterval(timerInterval);
-                // Redirect to math3 page
-                window.location.href = 'math3.html';
-            } else {
-                attempts++;
-                document.getElementById('error-message').textContent = 'Incorrect answer. Please try again.';
-                if (attempts >= 20) {
-                    clearInterval(timerInterval);
-                    // Redirect to lock page after 20 wrong attempts
-                    window.location.href = 'lock.html';
-                }
+                window.location.href = 'lock.html';
+            }
+        }, 1000);
+    }
+
+    function checkAnswer() {
+        var userAnswer = parseFloat(document.getElementById('answer').value);
+        if (userAnswer === 1.33) {
+            clearInterval(timerInterval);
+            window.location.href = 'math3.html';
+        } else {
+            attempts++;
+            document.getElementById('error-message').textContent = 'Incorrect answer. Please try again.';
+            if (attempts >= 20) {
+                clearInterval(timerInterval);
+                window.location.href = 'lock.html';
             }
         }
-    </script>
+    }
+</script>
+
+
+  
 </body>
 </html>

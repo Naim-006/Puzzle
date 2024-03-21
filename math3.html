@@ -111,68 +111,73 @@
         
     </div>
 
-    <script>
-        window.onload = function() {
-    // Check if the page is refreshed
-    if (performance.navigation.type === 1) {
-        // Redirect to index.html
-        window.location.href = 'index.html';
-    }
-};
+ 
+<script>
+    var isRefreshing = false;
 
-        function toggleDeveloperInfo() {
-            var developerInfo = document.getElementById('developer-info');
-            if (developerInfo.style.display === 'none') {
-                developerInfo.style.display = 'block';
-            } else {
-                developerInfo.style.display = 'none';
-            }
-        }
-        var attempts = 0;
-        var timerInterval;
-
-        function startTimer(duration, display) {
-            var timer = duration, minutes, seconds;
-            timerInterval = setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = "Timer: " + minutes + ":" + seconds;
-
-                if (--timer < 0) {
-                    clearInterval(timerInterval);
-                    // Redirect to lock page after 2 minutes
-                    window.location.href = 'lock.html';
-                }
-            }, 1000);
-        }
-
-        window.onload = function () {
-            var twoMinutes = 120,
-                display = document.querySelector('#timer');
+    window.onload = function() {
+        // Check if the page is refreshed
+        if (performance.navigation.type === 1 && !isRefreshing) {
+            setTimeout(function() {
+                window.location.href = 'cheat.html';
+            }, 100);
+        } else {
+            var twoMinutes = 120;
+            var display = document.querySelector('#timer');
             startTimer(twoMinutes, display);
-        };
+        }
+    };
 
-        function checkAnswer() {
-            var userAnswer = parseFloat(document.getElementById('answer').value);
-            if (userAnswer === 9.6) {
+    window.onbeforeunload = function() {
+        isRefreshing = true;
+    };
+
+    function toggleDeveloperInfo() {
+        var developerInfo = document.getElementById('developer-info');
+        if (developerInfo.style.display === 'none') {
+            developerInfo.style.display = 'block';
+        } else {
+            developerInfo.style.display = 'none';
+        }
+    }
+
+    var attempts = 0;
+    var timerInterval;
+
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        timerInterval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = "Timer: " + minutes + ":" + seconds;
+
+            if (--timer < 0) {
                 clearInterval(timerInterval);
-                // Redirect to math4 page
-                window.location.href = 'math4.html';
-            } else {
-                attempts++;
-                document.getElementById('error-message').textContent = 'Incorrect answer';
-                document.getElementById('attempts').textContent = 'Attempts: ' + attempts;
-                if (attempts >= 5) {
-                    clearInterval(timerInterval);
-                    // Redirect to lock page after 5 wrong attempts
-                    window.location.href = 'lock.html';
-                }
+                window.location.href = 'lock.html';
+            }
+        }, 1000);
+    }
+
+    function checkAnswer() {
+        var userAnswer = parseFloat(document.getElementById('answer').value);
+        if (userAnswer === 9.6) {
+            clearInterval(timerInterval);
+            window.location.href = 'math4.html';
+        } else {
+            attempts++;
+            document.getElementById('error-message').textContent = 'Incorrect answer';
+            document.getElementById('attempts').textContent = 'Attempts: ' + attempts;
+            if (attempts >= 5) {
+                clearInterval(timerInterval);
+                window.location.href = 'lock.html';
             }
         }
-    </script>
+    }
+</script>
+
 </body>
 </html>

@@ -110,69 +110,72 @@
         </div>
        
 
-    <script>
-        window.onload = function() {
-    // Check if the page is refreshed
-    if (performance.navigation.type === 1) {
-        // Redirect to index.html
-        window.location.href = 'index.html';
-    }
-};
+   <script>
+    var isRefreshing = false;
 
-        function toggleDeveloperInfo() {
-            var developerInfo = document.getElementById('developer-info');
-            if (developerInfo.style.display === 'none') {
-                developerInfo.style.display = 'block';
-            } else {
-                developerInfo.style.display = 'none';
+    window.onload = function() {
+        // Check if the page is refreshed
+        if (performance.navigation.type === 1 && !isRefreshing) {
+            setTimeout(function() {
+                window.location.href = 'cheat.html';
+            }, 100);
+        } else {
+            var twoMinutes = 120;
+            var display = document.querySelector('#timer');
+            startTimer(twoMinutes, display);
+        }
+    };
+
+    window.onbeforeunload = function() {
+        isRefreshing = true;
+    };
+
+    function toggleDeveloperInfo() {
+        var developerInfo = document.getElementById('developer-info');
+        if (developerInfo.style.display === 'none') {
+            developerInfo.style.display = 'block';
+        } else {
+            developerInfo.style.display = 'none';
+        }
+    }
+
+    var attempts = 0;
+    var timerInterval;
+
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        timerInterval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = "Timer: " + minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                clearInterval(timerInterval);
+                window.location.href = 'lock.html';
+            }
+        }, 1000);
+    }
+
+    function checkAnswer() {
+        var userAnswer = document.getElementById('answer').value.trim();
+        if (userAnswer.toLowerCase() === 'i') {
+            clearInterval(timerInterval);
+            window.location.href = 'final.html';
+        } else {
+            attempts++;
+            document.getElementById('error-message').textContent = 'Incorrect answer';
+            document.getElementById('attempts').textContent = 'Attempts: ' + attempts;
+            if (attempts >= 3) {
+                clearInterval(timerInterval);
+                window.location.href = 'lock.html';
             }
         }
-        var attempts = 0;
-        var timerInterval;
-
-        function startTimer(duration, display) {
-            var timer = duration, minutes, seconds;
-            timerInterval = setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = "Timer: " + minutes + ":" + seconds;
-
-                if (--timer < 0) {
-                    clearInterval(timerInterval);
-                    // Redirect to lock page after 2 minutes
-                    window.location.href = 'lock.html';
-                }
-            }, 1000);
-        }
-
-        window.onload = function () {
-            var twoMinutes = 120,
-                display = document.querySelector('#timer');
-            startTimer(twoMinutes, display);
-        };
-
-        function checkAnswer() {
-    var userAnswer = document.getElementById('answer').value.trim();
-    if (userAnswer.toLowerCase() === 'i') { // Change the condition to match the answer 'i'
-        clearInterval(timerInterval);
-        // Redirect to math4 page
-        window.location.href = 'final.html';
-    } else {
-        attempts++;
-        document.getElementById('error-message').textContent = 'Incorrect answer';
-        document.getElementById('attempts').textContent = 'Attempts: ' + attempts;
-        if (attempts >= 3) {
-            clearInterval(timerInterval);
-            // Redirect to lock page after 3 wrong attempts
-            window.location.href = 'lock.html';
-        }
     }
-}
+</script>
 
-    </script>
 </body>
 </html>
