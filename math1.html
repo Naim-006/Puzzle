@@ -65,7 +65,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .menu-bar { position: absolute; top: 30px; right: 30px; cursor: pointer; color: #0003da; }
-         .developer-info { display: none; position: fixed; top:10%; left: %; background-color:#ace5e5; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); }
+         .developer-info { display: none; position: fixed; top:10%; left: %; background-color:#ffeaff; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
 <body>
@@ -96,6 +96,14 @@
     </div>
 
     <script>
+        window.onload = function() {
+    // Check if the page is refreshed
+    if (performance.navigation.type === 1) {
+        // Redirect to index.html
+        window.location.href = 'index.html';
+    }
+};
+
         function toggleDeveloperInfo() {
             var developerInfo = document.getElementById('developer-info');
             if (developerInfo.style.display === 'none') {

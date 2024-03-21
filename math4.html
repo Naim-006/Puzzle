@@ -77,7 +77,7 @@
             font-family:courier;
         }
           .menu-bar { position: absolute; top: 15px; right: 20px; cursor: pointer; color: #0003da; }
-         .developer-info { display: none; position: fixed; top:10%; left: %; background-color:; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); width:85%;height:80%;}
+         .developer-info { display: none; position: fixed; top:10%; left: %; background-color:#d5fff4; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); width:85%;height:80%;}
     </style>
 </head>
 <body><div class="menu-bar" onclick="toggleDeveloperInfo()"> _____<br>_____<br>_____</div>
@@ -103,14 +103,23 @@
         <div class="question-container">
             
             <h3>What is the answer?</h3>
-            <input type="text" id="answer" class="answer-input" placeholder="Enter your answer (G.H)" required>
+            <input type="text" id="answer" class="answer-input" placeholder="Enter your answer " required>
             <button onclick="checkAnswer()" class="next-button">Next</button>
             <p id="error-message" class="error-message"></p>
             <p id="attempts" class="attempts"></p>
         </div>
        
 
-    <script>function toggleDeveloperInfo() {
+    <script>
+        window.onload = function() {
+    // Check if the page is refreshed
+    if (performance.navigation.type === 1) {
+        // Redirect to index.html
+        window.location.href = 'index.html';
+    }
+};
+
+        function toggleDeveloperInfo() {
             var developerInfo = document.getElementById('developer-info');
             if (developerInfo.style.display === 'none') {
                 developerInfo.style.display = 'block';
@@ -147,22 +156,23 @@
         };
 
         function checkAnswer() {
-            var userAnswer = parseFloat(document.getElementById('answer').value);
-            if (passwordInput === 5.25 ) {
-                clearInterval(timerInterval);
-                // Redirect to final page
-                window.location.href = 'final.html';
-            } else {
-                attempts++;
-                document.getElementById('error-message').textContent = 'Incorrect answer';
-                document.getElementById('attempts').textContent = 'Attempts: ' + attempts;
-                if (attempts >= 3) {
-                    clearInterval(timerInterval);
-                    // Redirect to lock page after 3 wrong attempts
-                    window.location.href = 'lock.html';
-                }
-            }
+    var userAnswer = document.getElementById('answer').value.trim();
+    if (userAnswer.toLowerCase() === 'i') { // Change the condition to match the answer 'i'
+        clearInterval(timerInterval);
+        // Redirect to math4 page
+        window.location.href = 'final.html';
+    } else {
+        attempts++;
+        document.getElementById('error-message').textContent = 'Incorrect answer';
+        document.getElementById('attempts').textContent = 'Attempts: ' + attempts;
+        if (attempts >= 3) {
+            clearInterval(timerInterval);
+            // Redirect to lock page after 3 wrong attempts
+            window.location.href = 'lock.html';
         }
+    }
+}
+
     </script>
 </body>
 </html>

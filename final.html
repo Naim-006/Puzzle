@@ -89,17 +89,25 @@
         .</marquee>
         
         
-        <h2></h2><b> •Find the Exact Letter of <u>ADGH?</u> and arrange them following to
-make a perfect name.</b><br><br>
-        <img src="https://i.ibb.co/m8TnB99/Smart-Select-20240318-072047-Slides.jpg">
-        <h2>What is the answer?</h2>
+        <h2></h2><b> •Arrange the Letter by this sequence(<u>ADGH?)</u> here, ADGH have their own respective value and ? containing a Alphabet. you have to connect them like <br>(Alphabet under value of A)+(..D)+(..G)+(..H)+(value of ?)  </b><br><br>
+        <img src="wordbox.jpg">
+        <h2>What is the word?</h2>
         <input type="text" id="answer" class="answer-input" placeholder="Enter your answer" required>
         <br>
         <button onclick="checkAnswer()" class="next-button">Next</button>
         <p id="error-message" class="error-message"></p>
     </div>
 
-    <script>function toggleDeveloperInfo() {
+    <script>
+        window.onload = function() {
+    // Check if the page is refreshed
+    if (performance.navigation.type === 1) {
+        // Redirect to index.html
+        window.location.href = 'index.html';
+    }
+};
+
+        function toggleDeveloperInfo() {
             var developerInfo = document.getElementById('developer-info');
             if (developerInfo.style.display === 'none') {
                 developerInfo.style.display = 'block';
@@ -108,21 +116,22 @@ make a perfect name.</b><br><br>
             }
         }
         var attempts = 0;
+        
+function checkAnswer() {
+    var userAnswer = document.getElementById('answer').value.trim();
+    if (userAnswer.toLowerCase() === 'ILAHi') { // Change the condition to match the answer 'ILAHi'
+        // Redirect to the next page
+        window.location.href = 'congratulation.html';
+    } else {
+        attempts++;
+        document.getElementById('error-message').textContent = 'Incorrect answer. Please try again.';
+        if (attempts >= 5) {
+            // Lock the page 
+            window.location.href = 'lock.html';
+        }        
+    }        
+}
 
-        function checkAnswer() {
-            var userAnswer = parseFloat(document.getElementById('answer').value);
-            if (userAnswer === 5.25) {
-                // Redirect to the next page
-                window.location.href = 'congratulation.html';
-            } else {
-                attempts++;
-                document.getElementById('error-message').textContent = 'Incorrect answer. Please try again.';
-                if (attempts >= 5) {
-                    // Lock the page 
-                    window.location.href = 'lock.html';
-                }
-            }
-        }
     </script>
 </body>
 </html>

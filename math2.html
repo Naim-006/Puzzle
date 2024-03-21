@@ -108,7 +108,16 @@
         </div>
     </div>
 
-    <script>function toggleDeveloperInfo() {
+    <script>
+        window.onload = function() {
+    // Check if the page is refreshed
+    if (performance.navigation.type === 1) {
+        // Redirect to index.html
+        window.location.href = 'index.html';
+    }
+};
+
+        function toggleDeveloperInfo() {
             var developerInfo = document.getElementById('developer-info');
             if (developerInfo.style.display === 'none') {
                 developerInfo.style.display = 'block';
@@ -146,7 +155,7 @@
 
         function checkAnswer() {
             var userAnswer = parseFloat(document.getElementById('answer').value);
-            if (userAnswer === 1.33) {
+            if (userAnswer === 5.64) {
                 clearInterval(timerInterval);
                 // Redirect to math3 page
                 window.location.href = 'math3.html';
