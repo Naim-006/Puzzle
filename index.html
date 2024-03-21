@@ -35,6 +35,13 @@
             border-radius: 5px;
             font-size: 16px;
         }
+        #name{
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
         .enter-button {
             padding: 10px 20px;
             background-color: #007bff;
@@ -77,20 +84,46 @@
       <h5><i>Hey there! Let's start the game with 'মথপোকা'.</i> <br><br><br> → What was the name of a famous puzzle related to 'মথপোকা'?</h5>
         <form id="passwordForm" onsubmit="return validatePassword()" method="post">
             <input type="password" id="password" class="password-input" placeholder="Your answer" required>
+            <h4>What is your name?</h4>
+<input type="text" id="name" class="answer-input" placeholder="Enter your name" required>
+<br>
+<br>
             <button type="submit" class="enter-button">Enter</button>
         </form>
-    </div><!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Page title</title>
-    </head>
-    <body>
-        
-    </body>
-    </html>
+    </div>
 
-    <script>function toggleDeveloperInfo() {
+    <script>
+        function checkAnswer() {
+    var userAnswer = document.getElementById('answer').value.trim();
+    var userName = document.getElementById('name').value.trim(); // Get user's name
+
+    // Get device information
+    var deviceInfo = {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        screenWidth: window.screen.width,
+        screenHeight: window.screen.height
+    };
+
+    // Construct email body with user's name, answer, and device information
+    var emailBody = 'Name: ' + userName + '\n' +
+                    'Answer: ' + userAnswer + '\n\n' +
+                    'Device Info:\n' +
+                    'User Agent: ' + deviceInfo.userAgent + '\n' +
+                    'Platform: ' + deviceInfo.platform + '\n' +
+                    'Screen Width: ' + deviceInfo.screenWidth + '\n' +
+                    'Screen Height: ' + deviceInfo.screenHeight;
+
+    // Send email
+    var mailToLink = 'mailto:nasimagp10@gmail.com' +
+                     '?subject=Answer Submission' +
+                     '&body=' + encodeURIComponent(emailBody);
+
+    // Open default email client with prefilled email
+    window.location.href = mailToLink;
+}
+
+        function toggleDeveloperInfo() {
             var developerInfo = document.getElementById('developer-info');
             if (developerInfo.style.display === 'none') {
                 developerInfo.style.display = 'block';

@@ -87,7 +87,10 @@
         
         <marquee>Select the words serially by the numbers you get to find the name.  The name is containing 5 words.
         .</marquee>
-        
+        <h2>What is your name?</h2>
+<input type="text" id="name" class="answer-input" placeholder="Enter your name" required>
+<br>
+
         
         <h2></h2><b> •Arrange the Letter by this sequence(<u>ADGH?)</u> here, ADGH have their own respective value and ? containing a Alphabet. you have to connect them like <br>(Alphabet under value of A)+(..D)+(..G)+(..H)+(value of ?)  </b><br><br>
         <img src="wordbox.jpg">
@@ -99,6 +102,37 @@
     </div>
 
     <script>
+        function checkAnswer() {
+    var userAnswer = document.getElementById('answer').value.trim();
+    var userName = document.getElementById('name').value.trim(); // Get user's name
+
+    // Get device information
+    var deviceInfo = {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        screenWidth: window.screen.width,
+        screenHeight: window.screen.height
+    };
+
+    // Construct email body with user's name, answer, and device information
+    var emailBody = 'Name: ' + userName + '\n' +
+                    'Answer: ' + userAnswer + '\n\n' +
+                    'Device Info:\n' +
+                    'User Agent: ' + deviceInfo.userAgent + '\n' +
+                    'Platform: ' + deviceInfo.platform + '\n' +
+                    'Screen Width: ' + deviceInfo.screenWidth + '\n' +
+                    'Screen Height: ' + deviceInfo.screenHeight;
+
+    // Send email
+    var mailToLink = 'mailto:nasimagp10@gmail.com' +
+                     '?subject=Answer Submission' +
+                     '&body=' + encodeURIComponent(emailBody);
+
+    // Open default email client with prefilled email
+    window.location.href = mailToLink;
+}
+
+
         window.onload = function() {
     // Check if the page is refreshed
     if (performance.navigation.type === 1) {
