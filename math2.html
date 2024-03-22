@@ -117,6 +117,12 @@
             setTimeout(function() {
                 window.location.href = 'cheat.html';
             }, 100);
+            window.onload = function() {
+        // Check if the page is refreshed
+        if (performance.navigation.type === 2 && !isRefreshing) {
+            setTimeout(function() {
+                window.location.href = 'index.html';
+            }, 100);
         } else {
             var twoMinutes = 119;
             var display = document.querySelector('#timer');
