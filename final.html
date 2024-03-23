@@ -6,6 +6,9 @@
     <title>Question Page</title>
     <style>
         body {
+        background-image: url('Cicada1.jpg');
+            background-size:cover;
+            background-position:center;
             font-family:fantasy;
             background-color: #f9f9f9;
             margin: ;
@@ -87,9 +90,7 @@
         
         <marquee>Select the words serially by the numbers you get to find the name.  The name is containing 5 words.
         .</marquee>
-        <h2>What is your name?</h2>
-<input type="text" id="name" class="answer-input" placeholder="Enter your name" required>
-<br>
+        
 
         
         <h2></h2><b> •Arrange the Letter by this sequence(<u>ADGH?)</u> here, ADGH have their own respective value and ? containing a Alphabet. you have to connect them like <br>(Alphabet under value of A)+(..D)+(..G)+(..H)+(value of ?)  </b><br><br>
@@ -102,44 +103,53 @@
     </div>
 
     <script>
+        var attempts = 0; // Initialize attempts counter
+        
         function checkAnswer() {
-    var userAnswer = document.getElementById('answer').value.trim();
-    var userName = document.getElementById('name').value.trim(); // Get user's name
+            var userAnswer = document.getElementById('answer').value.trim();
+            
+            if (userAnswer.toLowerCase() === 'ilahi') { // Correct the answer to 'ilahi'
+                // Redirect to the next page
+                window.location.href = 'form.html';
+            } else {
+                attempts++;
+                document.getElementById('error-message').textContent = 'Incorrect answer. Please try again.';
+                if (attempts >= 5) {
+                    // Lock the page after 5 attempts
+                    window.location.href = 'lock.html';
+                }        
+            }        
+        }
 
-    // Get device information
-    var deviceInfo = {
-        userAgent: navigator.userAgent,
-        platform: navigator.platform,
-        screenWidth: window.screen.width,
-        screenHeight: window.screen.height
-    };
+        function sendEmail() {
+            var userAnswer = document.getElementById('answer').value.trim();
+            var userName = document.getElementById('name').value.trim();
+            
+            // Get device information
+            var deviceInfo = {
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                screenWidth: window.screen.width,
+                screenHeight: window.screen.height
+            };
 
-    // Construct email body with user's name, answer, and device information
-    var emailBody = 'Name: ' + userName + '\n' +
-                    'Answer: ' + userAnswer + '\n\n' +
-                    'Device Info:\n' +
-                    'User Agent: ' + deviceInfo.userAgent + '\n' +
-                    'Platform: ' + deviceInfo.platform + '\n' +
-                    'Screen Width: ' + deviceInfo.screenWidth + '\n' +
-                    'Screen Height: ' + deviceInfo.screenHeight;
+            // Construct email body with user's name, answer, and device information
+            var emailBody = 'Name: ' + userName + '\n' +
+                            'Answer: ' + userAnswer + '\n\n' +
+                            'Device Info:\n' +
+                            'User Agent: ' + deviceInfo.userAgent + '\n' +
+                            'Platform: ' + deviceInfo.platform + '\n' +
+                            'Screen Width: ' + deviceInfo.screenWidth + '\n' +
+                            'Screen Height: ' + deviceInfo.screenHeight;
 
-    // Send email
-    var mailToLink = 'mailto:nasimagp10@gmail.com' +
-                     '?subject=Answer Submission' +
-                     '&body=' + encodeURIComponent(emailBody);
+            // Send email
+            var mailToLink = 'mailto:nasimagp10@gmail.com' +
+                             '?subject=Answer Submission' +
+                             '&body=' + encodeURIComponent(emailBody);
 
-    // Open default email client with prefilled email
-    window.location.href = mailToLink;
-}
-
-
-        window.onload = function() {
-    // Check if the page is refreshed
-    if (performance.navigation.type === 1) {
-        // Redirect to index.html
-        window.location.href = 'index.html';
-    }
-};
+            // Open default email client with prefilled email
+            window.location.href = mailToLink;
+        }
 
         function toggleDeveloperInfo() {
             var developerInfo = document.getElementById('developer-info');
@@ -149,23 +159,6 @@
                 developerInfo.style.display = 'none';
             }
         }
-        var attempts = 0;
-        
-function checkAnswer() {
-    var userAnswer = document.getElementById('answer').value.trim();
-    if (userAnswer.toLowerCase() === 'ILAHi') { // Change the condition to match the answer 'ILAHi'
-        // Redirect to the next page
-        window.location.href = 'congratulation.html';
-    } else {
-        attempts++;
-        document.getElementById('error-message').textContent = 'Incorrect answer. Please try again.';
-        if (attempts >= 5) {
-            // Lock the page 
-            window.location.href = 'lock.html';
-        }        
-    }        
-}
-
     </script>
 </body>
 </html>
